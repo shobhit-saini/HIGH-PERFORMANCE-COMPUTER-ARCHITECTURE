@@ -1,0 +1,17 @@
+Suppose you need to write a program in C/JAVA/Python that takes an assembly language code as input and finds various types of dependencies in the code. The dependency can be data, control or structural dependency in a typical 5-stage pipelined processor with no hardware optimization. Assume the architecture supports MIPS 32-bit instructions as given in the attachment except the system calls and assembler directives. Go through the instructions carefully and try to include as much instruction as
+possible that your code can handle. MIPS has 32 registers as described in the document. Assume each stage of the pipeline tales one clock cycle.
+A typical MIPS code can be like this:
+1. lw $1, 100($2) : $1=Memory[$2+100]
+2. lw $2, 200($1) : $2=Memory[$1+200]
+3. add $4, $1, $2 : $4=$1+$2
+….
+In the above code, instruction 2 has data dependency over instruction 1. Instruction 3 has data
+dependency over instruction 1 and instruction 2. The output should be like:
+DATA DEPENDENCIES:
+1->2: $1 is not updated before it is accessed in instruction 2.
+1->3: $1 is not updated before it is accessed in instruction 3.
+2->3: $2 is not updated before it is accessed in instruction 3.
+CONTROL DEPENDENCIES:
+List all control dependencies in the similar way (if any)
+STRUCTURAL DEPENDENCIES:
+List all structural dependencies in the similar ways (if any)
